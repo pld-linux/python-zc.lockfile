@@ -10,7 +10,7 @@ Summary(pl.UTF-8):	Podstawowe blokady pomiędzy procesami
 Name:		python-%{module}
 # keep 2.x here for python2 support
 Version:	2.0
-Release:	1
+Release:	2
 License:	ZPL v2.1
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/zc.lockfile/
@@ -102,11 +102,15 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
 %py_install
 
+%{__rm} $RPM_BUILD_ROOT%{py_sitescriptdir}/zc/lockfile/tests.py*
 %py_postclean
 %endif
 
 %if %{with python3}
 %py3_install
+
+%{__rm} $RPM_BUILD_ROOT%{py3_sitescriptdir}/zc/lockfile/tests.py
+%{__rm} $RPM_BUILD_ROOT%{py3_sitescriptdir}/zc/lockfile/__pycache__/tests.*.py*
 %endif
 
 %clean
